@@ -76,3 +76,8 @@ COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
 CMD ["/bin/bash"]
+
+RUN pip2 install -e git+https://github.com/wschuell/experiment_manager.git@origin/develop#egg=experiment_manager && pip3 install -e git+https://github.com/wschuell/experiment_manager.git@origin/develop#egg=experiment_manager
+RUN yum install -y initscripts openssh-server openssh-clients passwd && ssh-keygen -A && systemctl enable sshd.service
+
+RUN echo -e "dockerslurm\ndockerslurm\n" | passwd
